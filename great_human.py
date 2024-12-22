@@ -18,7 +18,8 @@ skils = ["Стремительный прыжок","Электрический �
 ez = random.sample(skils,3)
 skill_1 = ez[0]
 skill_2 = ez[1]
-skill_3 = ez [2]
+skill_3 = ez[2]
+
 
 
 langueage = {
@@ -46,8 +47,12 @@ langueage = {
     'Э': 'Э͒͠͠', 'Ю': 'Ю̋͠', 'Я': 'Я̋',
     ' ': ' '
 }
-langueage.items()
 
+
+for a,b in langueage.items():
+    new_skils = skill_1.replace(a,b)
+
+    print(a,b)
 
 context = {
 "first_name": first_name ,
@@ -60,12 +65,11 @@ context = {
 "intelligence": intelligence,
 "luck": luck,
 
-"skill_1": skill_1.replace("е","е͠'"),
+"skill_1": skill_1.replace(a,b),
 "skill_2": skill_2.replace("е","е͠'"),
 "skill_3": skill_3.replace("е","е͠'")
 }
-# for lang1,lang2 in langueage.items():
-#     print((skill_1, skill_2, skill_3).format(lang1, lang2))
+
 
 
     
