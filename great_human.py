@@ -52,7 +52,7 @@ langueage = {
 for a,b in langueage.items():
     new_skils = skill_1.replace(a,b)
 
-    print(a,b)
+    # print(a,b)
 
 context = {
 "first_name": first_name ,
@@ -65,7 +65,7 @@ context = {
 "intelligence": intelligence,
 "luck": luck,
 
-"skill_1": skill_1.replace(a,b),
+"skill_1": skill_1,
 "skill_2": skill_2.replace("е","е͠'"),
 "skill_3": skill_3.replace("е","е͠'")
 }
