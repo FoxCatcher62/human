@@ -1,27 +1,17 @@
 import file_operations
+
+
 from faker import Faker
+
+
 import random
 
 
-fake = Faker("ru_RU")
-first_name = fake.first_name()
-last_name = fake.last_name()
-job = fake.job()
-town = fake.city()
-
-strength = random.randint(3,18)
-agility = random.randint(3,18)
-endurance = random.randint(3,18)
-intelligence = random.randint(3,18)
-luck = random.randint(3,18)
-skils = ["Стремительный прыжок","Электрический выстрел", "Ледяной удар","Стремительный удар","Кислотный взгляд","Тайный побег","Ледяной выстрел","Огненный заряд"]
-ez = random.sample(skils,3)
-skill_1 = ez[0]
-skill_2 = ez[1]
-skill_3 = ez[2]
+import os
 
 
-
+count = 0
+new =[]
 langueage = {
     'а': 'а͠', 'б': 'б̋', 'в': 'в͒͠',
     'г': 'г͒͠', 'д': 'д̋', 'е': 'е͠',
@@ -49,28 +39,70 @@ langueage = {
 }
 
 
-for a,b in langueage.items():
-    new_skils = skill_1.replace(a,b)
 
-    # print(a,b)
 
-context = {
-"first_name": first_name ,
-"last_name": last_name,
-"job": job,
-"town": town,
-"strength": strength,
-"agility": agility,
-"endurance": endurance,
-"intelligence": intelligence,
-"luck": luck,
+folder_path = "E:\\python_project\\5\\cahrsheet"
+os.makedirs(folder_path,mode=0o777, exist_ok=True)
 
-"skill_1": skill_1,
-"skill_2": skill_2.replace("е","е͠'"),
-"skill_3": skill_3.replace("е","е͠'")
-}
 
+
+
+fake = Faker("ru_RU")
+skils = ["Стремительный прыжок","Электрический выстрел", "Ледяной удар","Стремительный удар","Кислотный взгляд","Тайный побег","Ледяной выстрел","Огненный заряд"]
+
+
+
+
+
+for users in range(10):
+    first_name = fake.first_name()
+    last_name = fake.last_name()
+    job = fake.job()
+    town = fake.city()
+    strength = random.randint(3,18)
+    agility = random.randint(3,18)
+    endurance = random.randint(3,18)
+    intelligence = random.randint(3,18)
+    luck = random.randint(3,18)
+    count += 1
+
+
+    for char in skils:
+        new_skill = char
+
+
+        for a,b in langueage.items():
+            new_skill = new_skill.replace(a,b)
+        new.append(new_skill)
+
+
+    ez = random.sample(new, 3)
+    skill_1 = ez[0]
+    skill_2 = ez[1]
+    skill_3 = ez[2]
+
+
+    context = {
+    "first_name": first_name ,
+    "last_name": last_name,
+    "job": job,
+    "town": town,
+    "strength": strength,
+    "agility": agility,
+    "endurance": endurance,
+    "intelligence": intelligence,
+    "luck": luck,
+    "skill_1": skill_1,
+    "skill_2": skill_2,
+    "skill_3": skill_3
+    }
 
 
     
-file_operations.render_template("E:\\python_project\\5\\charsheet\\charsheet.svg", "E:\\python_project\\5\\cahrsheet_new\\result.svg", context)
+    
+    m = str(count)
+    a = r"E:\python_project\5\charsheet.svg"
+    b = r"E:\python_project\5\cahrsheet\result_num.svg".replace("num",m)
+
+  
+    file_operations.render_template(a, b, context)
