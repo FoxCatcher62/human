@@ -10,7 +10,6 @@ import random
 import os
 from pathlib import Path
 
-count = 0
 new = []
 skils = [
     "Стремительный прыжок",
@@ -93,56 +92,53 @@ langueage = {
 }
 
 
-folder_path = Path("E:/python_project/5/cahrsheet")
+folder_path = Path("../5/cahrsheet")
 os.makedirs(folder_path, mode=0o777, exist_ok=True)
 
 
 fake = Faker("ru_RU")
 
 
-for users in range(10):
-    first_name = fake.first_name()
-    last_name = fake.last_name()
-    job = fake.job()
-    town = fake.city()
-    strength = random.randint(3, 18)
-    agility = random.randint(3, 18)
-    endurance = random.randint(3, 18)
-    intelligence = random.randint(3, 18)
-    luck = random.randint(3, 18)
-    count += 1
+def cards():
+    count = 0
+    for users in range(10):
+        first_name = fake.first_name()
+        last_name = fake.last_name()
+        job = fake.job()
+        town = fake.city()
+        strength = random.randint(3, 18)
+        agility = random.randint(3, 18)
+        endurance = random.randint(3, 18)
+        intelligence = random.randint(3, 18)
+        luck = random.randint(3, 18)
+        count += 1
+        for char in skils:
+            new_skill = char
+            for a, b in langueage.items():
+                new_skill = new_skill.replace(a, b)
+            new.append(new_skill)
+        ez = random.sample(new, 3)
+        skill_1 = ez[0]
+        skill_2 = ez[1]
+        skill_3 = ez[2]
+        context = {
+            "first_name": first_name,
+            "last_name": last_name,
+            "job": job,
+            "town": town,
+            "strength": strength,
+            "agility": agility,
+            "endurance": endurance,
+            "intelligence": intelligence,
+            "luck": luck,
+            "skill_1": skill_1,
+            "skill_2": skill_2,
+            "skill_3": skill_3,
+        }
+        m = str(count)
+        template = Path("../5/charsheet.svg")
+        template_result = Path("../5/cahrsheet/result_num.svg".replace("num", m))
+        file_operations.render_template(template, template_result, context)
 
-    for char in skils:
-        new_skill = char
 
-        for a, b in langueage.items():
-            new_skill = new_skill.replace(a, b)
-        new.append(new_skill)
-
-    ez = random.sample(new, 3)
-    skill_1 = ez[0]
-    skill_2 = ez[1]
-    skill_3 = ez[2]
-
-    context = {
-        "first_name": first_name,
-        "last_name": last_name,
-        "job": job,
-        "town": town,
-        "strength": strength,
-        "agility": agility,
-        "endurance": endurance,
-        "intelligence": intelligence,
-        "luck": luck,
-        "skill_1": skill_1,
-        "skill_2": skill_2,
-        "skill_3": skill_3,
-    }
-
-    m = str(count)
-    template = Path("E:/python_project/5/charsheet.svg")
-    template_result = Path(
-        "E:/python_project/5/cahrsheet/result_num.svg".replace("num", m)
-    )
-
-    file_operations.render_template(template, template_result, context)
+cards()
