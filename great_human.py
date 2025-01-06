@@ -5,7 +5,7 @@ from faker import Faker
 import file_operations
 
 
-folder_path = Path("../5/cahrsheet")
+folder_path = Path("./cahrsheet")
 os.makedirs(folder_path, mode=0o777, exist_ok=True)
 
 
@@ -129,9 +129,10 @@ def cards():
             "skill_3": skill_3,
         }
         m = str(count)
-        template = Path("../5/charsheet.svg")
-        template_result = Path("../5/cahrsheet/result_num.svg".replace("num", m))
+        template = Path("./charsheet.svg")
+        template_result = Path("./cahrsheet/result_num.svg".replace("num", m))
         file_operations.render_template(template, template_result, context)
 
 
-cards()
+if __name__ == "__main__":
+    cards()
