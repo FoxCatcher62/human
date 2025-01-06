@@ -5,14 +5,10 @@ from faker import Faker
 import file_operations
 
 
-folder_path = Path("./cahrsheet")
-os.makedirs(folder_path, mode=0o777, exist_ok=True)
-
-
-fake = Faker("ru_RU")
-
-
 def cards():
+    folder_path = Path("./cahrsheet")
+    os.makedirs(folder_path, mode=0o777, exist_ok=True)
+    fake = Faker("ru_RU")
     count = 0
     for users in range(10):
         first_name = fake.first_name()
